@@ -1,6 +1,7 @@
 import {useParams} from "react-router-dom";
 import PostItem from "./components/PostItem";
 import {useState} from "react";
+import CommentItem from "./components/CommentItem";
 
 function PostDetailPage() {
     const [pressLike, setPressLike] = useState(true);
@@ -22,10 +23,17 @@ function PostDetailPage() {
             title: '타이틀33',
             content: '33입니다'
         }]; // 가데이터
-
+    const comments = [{
+        id: 1,
+        cmt: [1, 2]
+    }, {
+        id: 2,
+        cmt: [1]
+    }];
     const data = '노래하며 능히 그들을 있는 따뜻한 역사를 봄날의 있는 것이다. \n 뭇 군영과 내려온 봄바람을 우는 가는 사막이다. 밥을 때에, 천고에 희망의 우리의 듣기만 얼마나 놀이 것이다. 있는 예수는 있음으로써 용감하고 보배를 피다. 청춘이 발휘하기 창공에 남는 아름다우냐? 것은 발휘하기 구하지 더운지라 할지니, 있음으로써 피어나기 너의 몸이 철환하였는가? 인간의 없으면, 이것을 간에 우리 그들의 주며, 피다. 뜨고, 속잎나고, 대고, 남는 듣기만 몸이 이것은 사막이다. 이는 소리다.이것은 힘차게 크고 인간에 발휘하기 군영과 황금시대를 밥을 봄바람이다. 사라지지 주며, 쓸쓸한 아름다우냐? 얼음과 보내는 같으며, 힘차게 피어나기 칼이다.\n';
     const prePost = '001';
     const nextPost = '002';
+
     const params = useParams();
 
 
@@ -141,7 +149,9 @@ function PostDetailPage() {
 
                 {/*댓글목록*/}
                 <div className="mb-10">
-                    <div></div>
+                    {
+                        comments.map( (item) => <CommentItem key={item.id} item={item.cmt}/>)
+                    }
                 </div>
 
                 {/*추천게시글*/}
