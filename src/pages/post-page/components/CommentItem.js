@@ -12,7 +12,7 @@ function CommentItem(props) {
                     <div className="text-sm">댓글 작성일자</div>
                 </div>
             </div>
-            <div className="pl-4 pb-3 border-b border-gray-300">댓글내용</div>
+            <div className="pl-4 pb-3 border-b border-gray-300 ">댓글내용</div>
 
             {
                 props.item.map(() =>

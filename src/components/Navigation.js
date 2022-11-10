@@ -37,7 +37,7 @@ function Navigation() {
                 </a>
                 <div>
                     {
-                        IsLogin === 1 ? <a href="#">{User}</a> : <a href="/login">로그인 하기</a>
+                        IsLogin === 0 ? <div className="flex gap-4"> <a>User 님</a> <a href="#">내 글목록</a> <a href="#">글 작성하기</a></div> : <a href="/login">로그인 하기</a>
                     }
                 </div>
             </div>

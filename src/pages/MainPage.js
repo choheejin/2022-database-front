@@ -32,7 +32,7 @@ function MainPage() {
 
     return(
         <div className="w-full flex justify-center">
-            <div className="w-[75%] mt-6 grid grid-cols-3 gap-4 items-center justify-center">
+            <div className="w-[75%] mt-6 grid grid-cols-3 gap-5 items-center justify-center">
                 {
                     n.map( (item) => <PostItem item={item} key={item.id}/> )
                 }
