@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-function CommentItem(props) {
+export default function CommentItem(props) {
     const [pressReCmt, setPressReCmt] = useState(false);
 
     return(
@@ -60,5 +60,3 @@ function CommentItem(props) {
         </div>
     );
 }
-
-export default CommentItem;

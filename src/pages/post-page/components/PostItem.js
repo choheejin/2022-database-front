@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 
-function PostItem(props) {
+export default function PostItem(props) {
     const navigate = useNavigate();
 
     const linkToDetail = () => {
@@ -18,5 +18,3 @@ function PostItem(props) {
         </div>
     );
 }
-
-export default PostItem;
