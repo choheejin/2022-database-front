@@ -1,6 +1,7 @@
 import {useState} from "react";
 
 export default function PostWritePage({isVisible}) {
+
     isVisible(false);
 
     const [isModified, setIsModified] = useState(false);
@@ -13,7 +14,7 @@ export default function PostWritePage({isVisible}) {
     return(
         <div className="grid grid-cols-2 h-screen">
             <div className={`flex w-full bg-no-repeat bg-center bg-contain h-auto bg-stone-900 bg-[url('sample.jpeg')]`}>
-                <div className="flex w-full h-full items-end justify-end px-4 py-2.5">
+                <div className="flex w-full h-full items-end justify-end px-4 py-4">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="white" className="w-6 h-6 cursor-pointer">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -45,10 +46,18 @@ export default function PostWritePage({isVisible}) {
                 </div>
 
                 <textarea placeholder="본문을 입력해주세요"
-                          className="bg-transparent focus:outline-none resize-none h-full pl-8"/>
-                <div className="flex justify-between bg-stone-700 py-3 px-3">
-                    <a href="/" className="text-white font-bold">나가기</a>
-                    <button className="text-blue-400 font-bold">작성하기</button>
+                          className="bg-transparent focus:outline-none resize-none h-full pl-8 pt-1 mb-2.5"/>
+                <div className="flex justify-between items-center bg-stone-700 py-2.5 px-3">
+                    <a href="/" className="flex gap-1 text-white font-bold hover:bg-stone-500 rounded-md px-3.5 py-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" className="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"/>
+                        </svg>
+                        나가기
+                    </a>
+                    <button className="bg-blue-500 hover:bg-blue-400 rounded-md text-white px-4 py-1.5 font-bold">
+                        {isModified ? '수정하기' : '작성하기'}</button>
                 </div>
             </form>
         </div>
