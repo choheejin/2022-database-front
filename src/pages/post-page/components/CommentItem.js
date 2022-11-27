@@ -32,9 +32,9 @@ export default function CommentItem(props) {
                 pressReCmt === true ?
                     <div className="pl-8">
                         <div onClick={() => setPressReCmt(!pressReCmt)} className="cursor-pointer gap-2 pb-2 w-fit flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2"
                                  stroke="rgb(59 130 246)" className="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
+                                <path strokeLinecap="round" strokeLinejoin="round"
                                       d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                             <div className="text-sm font-bold">숨기기</div>
@@ -47,9 +47,9 @@ export default function CommentItem(props) {
                 :
                     <div className="pl-8">
                        <div onClick={() => setPressReCmt(!pressReCmt)} className="cursor-pointer gap-2 w-fit flex items-center">
-                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2"
                                 stroke="rgb(59 130 246)" className="w-5 h-5">
-                               <path stroke-linecap="round" stroke-linejoin="round"
+                               <path strokeLinecap="round" strokeLinejoin="round"
                                      d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                            </svg>
                            <div className="text-sm font-bold">대댓글 작성하기</div>

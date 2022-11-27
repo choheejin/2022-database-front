@@ -1,9 +1,9 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
-import {PostDetailPage, PostListPage, PostWritePage} from "./pages/post-page";
+import {PostDetailPage, PostListPage, PostUploadPage} from "./pages/post-page";
 import {MainPage, NotFoundPage} from "./pages";
-import {LoginPage, SignupPage} from "./pages/auth-page";
+import {LoginPage, MyPage, SignupPage} from "./pages/auth-page";
 import {useState} from "react";
 
 function App() {
@@ -16,10 +16,11 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<LoginPage/>}></Route>
                     <Route path="/signup" element={<SignupPage/>}></Route>
+                    <Route path="/my-page" element={<MyPage/>}></Route>
 
                     <Route path="/posts/:key" element={<PostListPage/>}></Route>
                     <Route path="/post/detail/:key" element={<PostDetailPage/>}></Route>
-                    <Route path="/posts/write" element={<PostWritePage isVisible={setIsVisible}/>}></Route>
+                    <Route path="/posts/write" element={<PostUploadPage isVisible={setIsVisible}/>}></Route>
 
                     <Route path="/" element={<MainPage/>}></Route>
                     <Route path="*" element={<NotFoundPage/>}></Route>

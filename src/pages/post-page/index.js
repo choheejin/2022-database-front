@@ -1,5 +1,5 @@
 import PostDetailPage from "./PostDetailPage";
 import PostListPage from "./PostListPage";
-import PostWritePage from "./PostWritePage";
+import PostUploadPage from "./PostUploadPage";
 
-export {PostDetailPage, PostListPage, PostWritePage};
+export {PostDetailPage, PostListPage, PostUploadPage};
