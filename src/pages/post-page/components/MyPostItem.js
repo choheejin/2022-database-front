@@ -1,6 +1,15 @@
+import {useNavigate} from "react-router-dom";
+
 export default function MyPostItem(props) {
+    const navigate = new useNavigate();
+
+    const linkToDetail = () => {
+        navigate('/post/detail/2');
+    };
+
     return (
-        <div className="border-b-2 border-gray-200 mt-10">
+        <div className="border-b-2 border-gray-200 mt-10 cursor-pointer duration-[0.2s] hover:scale-105"
+             onClick={linkToDetail}>
             <img className="h-96 w-full object-center object-cover" src={process.env.REACT_APP_PUBLIC_URL + '/images/sample.jpeg'}></img>
             <div className="px-4 pb-8">
                 <div className="font-bold mt-2 text-lg pb-1 pt-2">대충 글제목</div>
