@@ -1,3 +1,5 @@
+import {MyBadge, MyStamp} from "./components";
+
 export default function MyPage() {
     const today = {
         year: new Date().getFullYear(), //오늘 연도
@@ -53,36 +55,13 @@ export default function MyPage() {
                 <div>
                     <div className="font-bold mb-4">획득한 배찌</div>
                     <div className="grid grid-cols-9 gap-2">
-                        <div className="rounded-full border border-gray-200 w-fit p-4">
-                            <img className="w-16 h-16 object-cover object-center" src={process.env.REACT_APP_PUBLIC_URL+'/images/badge1.png'} />
-                        </div>
-                        <div className="rounded-full border border-gray-200 w-fit p-4">
-                            <img className="w-16 h-16 object-cover object-center" src={process.env.REACT_APP_PUBLIC_URL+'/images/badge1.png'} />
-                        </div>
-                        <div className="rounded-full border border-gray-200 w-fit p-4">
-                            <img className="w-16 h-16 object-cover object-center" src={process.env.REACT_APP_PUBLIC_URL+'/images/badge1.png'} />
-                        </div>
+                        <MyBadge/>
                     </div>
                 </div>
                 <div>
                     <div className="font-bold mb-4">출석보드</div>
                     <div className="grid grid-cols-7">
-                        <div className="flex flex-col gap-2">
-                            <img className="w-16 h-16 object-center object-cover" src={process.env.REACT_APP_PUBLIC_URL + '/images/stamp.png'}/>
-                            <label className="text-sm">2022.11.28</label>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <img className="w-16 h-16 object-center object-cover" src={process.env.REACT_APP_PUBLIC_URL + '/images/stamp.png'}/>
-                            <label className="text-sm">2022.11.28</label>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <img className="w-16 h-16 object-center object-cover" src={process.env.REACT_APP_PUBLIC_URL + '/images/stamp.png'}/>
-                            <label className="text-sm">2022.11.28</label>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <img className="w-16 h-16 object-center object-cover" src={process.env.REACT_APP_PUBLIC_URL + '/images/stamp.png'}/>
-                            <label className="text-sm">2022.11.28</label>
-                        </div>
+                        <MyStamp/>
                     </div>
                 </div>
             </div>
