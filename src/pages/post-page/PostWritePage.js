@@ -1,4 +1,4 @@
-import '../../customAnimation/fadein.css';
+import '../../customAnimation.css';
 import { useState } from "react";
 
 export default function PostWritePage({ isVisible }) {

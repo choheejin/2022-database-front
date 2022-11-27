@@ -1,4 +1,4 @@
-import '../../customAnimation/fadein.css';
+import '../../customAnimation.css';
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { CommentItem, PostItem, PostWriter } from "./components";
