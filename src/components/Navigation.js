@@ -32,7 +32,7 @@ function Navigation() {
     return (
         <div className={`${IsScroll === 1 ? 'sticky top-0 z-50 bg-white drop-shadow' : ''} w-full flex justify-center mb-2`}>
             <div className="flex justify-between items-center w-[75%] py-4 px-2">
-                <a href="/" className="flex items-center gap-4">
+                <a href="/main" className="flex items-center gap-4">
                     <img className="w-9 h-9 cursor-pointer" src={process.env.REACT_APP_PUBLIC_URL + '/logo.png'} />
                     <div className="cursor-pointer font-bold text-gray-700 flex text-3xl font-cute">고뮤니티</div>
                 </a>

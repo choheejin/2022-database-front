@@ -22,7 +22,7 @@ function App() {
                     <Route path="/post/detail/:key" element={<PostDetailPage/>}></Route>
                     <Route path="/posts/write" element={<PostUploadPage isVisible={setIsVisible}/>}></Route>
 
-                    <Route path="/" element={<MainPage/>}></Route>
+                    <Route path="/main" element={<MainPage/>}></Route>
                     <Route path="*" element={<NotFoundPage/>}></Route>
                 </Routes>
             </Router>
