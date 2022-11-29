@@ -1,10 +1,11 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import Navigation from "./components/Navigation";
 import {PostDetailPage, PostListPage, PostUploadPage} from "./pages/post-page";
 import {MainPage, NotFoundPage} from "./pages";
 import {LoginPage, MyPage, SignupPage} from "./pages/auth-page";
 import {useState} from "react";
+
 
 function App() {
     const [isVisible, setIsVisible] = useState(true);
@@ -22,6 +23,10 @@ function App() {
                     <Route path="/post/detail/:key" element={<PostDetailPage/>}></Route>
                     <Route path="/posts/write" element={<PostUploadPage isVisible={setIsVisible}/>}></Route>
 
+                    <Route
+                        path="/"
+                        element={<Navigate to="/main" />}
+                    />
                     <Route path="/main" element={<MainPage/>}></Route>
                     <Route path="*" element={<NotFoundPage/>}></Route>
                 </Routes>
