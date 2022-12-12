@@ -39,10 +39,12 @@ export default function SignupPage() {
                     <div className="font-bold text-xl mb-2">회원 가입하기</div>
                     <input type="text"
                            name="id"
+                           placeholder="아이디를 작성해주세요."
                            className="focus:outline-none border border-gray-300 rounded-sm py-1"
                            onChange={handleChange}/>
                     <input type="password"
-                           name="password"
+                           name="pw"
+                           placeholder="패스워드를 작성해주세요."
                            className="focus:outline-none border border-gray-300 rounded-sm py-1"
                            onChange={handleChange}/>
                     {/* <input type="password"
