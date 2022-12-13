@@ -7,7 +7,7 @@ export default function MyPage() {
         date: new Date().getDate(), //오늘 날짜
         day: new Date().getDay(), //오늘 요일
     };
-
+    
     const userInfo = {
         title: '고마운 분',
         name : 'choheejin',

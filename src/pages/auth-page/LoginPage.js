@@ -1,33 +1,46 @@
 import {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import React from "react";
 
 function LoginPage() {
     const [userID, setUserID] = new useState('');
     const [password, setPassword] = new useState('');
+    const [isSubmit, setIsSubmit] = new useState(false);
 
     const navigate = new useNavigate();
 
     const submitUserInfo = (e) => {
+        setIsSubmit(true);
+
         e.preventDefault(); 
-        
-        const data = {
+        const logindata = {
             'id': userID,
             'pw': password
         };
-
         console.log(userID, password);
 
-        axios.post(process.env.REACT_APP_API_URL + '/login', data).then( response => {
+        
+        console.log(
+        "LoginForm:window.sessionStorage(id) =>",
+        window.sessionStorage.getItem("id")
+        );
+        axios
+            .post(process.env.REACT_APP_API_URL + '/login', logindata)
+            .then( response => {
+                console.log(response);
                 if (response.status === 200) {
+                    
                     alert('로그인에 성공하셨습니다.');
+                    localStorage.setItem("db-user_id", logindata.id);
+                    
                     navigate('/main');
                 }
                 else {
 
                 }
-            }
-        );
+            
+    });
 };
 
     return (
@@ -38,12 +51,12 @@ function LoginPage() {
                   <div className="font-bold text-xl mb-2">로그인하기</div>
                   <input type="text"
                          name="id"
-                         className="focus:outline-none border border-gray-300 rounded-sm py-1"
-                         onChange={(e) => { setUserID(e.target.value) }}/>
+                         className={`focus:outline-none border-2 rounded-sm py-1  ${isSubmit&(userID==='') ? "border-red-500" : "border-gray-300"}`}
+                         onChange={(e) => { setUserID(e.target.value); setIsSubmit(false); }}/>
                   <input type="password"
                          name="pw"
-                         className="focus:outline-none border border-gray-300 rounded-sm py-1"
-                         onChange={(e) => { setPassword(e.target.value)}}/>
+                         className={`focus:outline-none border-2 rounded-sm py-1  ${isSubmit&(password==='') ? "border-red-500" : "border-gray-300"}`}
+                         onChange={(e) => { setPassword(e.target.value); setIsSubmit(false); }}/>
                   <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-1">로그인하기</button>
                   <div className="text-end text-sm">아직 회원이 아니신가요? <a href="/signup" className="text-blue-600 font-bold text-lg">회원가입</a></div>
               </form>
