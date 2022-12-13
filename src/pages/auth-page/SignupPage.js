@@ -12,7 +12,8 @@ export default function SignupPage() {
         const name = e.target.name;
         const value = e.target.value;
         setInputs(values => ({...values, [name]: value}));
-    }
+    };
+
     const onSubmit = (e) => {
         e.preventDefault();
         // console.log(inputs);
