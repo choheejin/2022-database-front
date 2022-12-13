@@ -1,10 +1,34 @@
 import '../../customAnimation.css';
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { CommentItem, PostItem, PostWriter } from "./components";
+import axios from "axios";
 
 export default function PostDetailPage() {
     const [pressLike, setPressLike] = useState(true);
+    const [comment, setComment] = useState('');
+    const [comments, setComments] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const params = useParams();
+
+    const getComments = async () => {
+        return await axios.get(process.env.REACT_APP_API_URL + '/comments/' + params.key);
+    }
+
+    const postComment = () => {
+        axios.post(process.env.REACT_APP_API_URL + '/comment/post', {content: comment, user_id: 'dd', article_id: params.key}).then(response => {
+            setLoading(true);
+        })
+    };
+
+    useEffect(() => {
+        getComments().then(response => {
+            if(response.data.status === 200){
+                setComments(response.data.response);
+                setLoading(false);
+            }
+        });
+    },[loading]);
 
     const n = [
         {
@@ -23,19 +47,10 @@ export default function PostDetailPage() {
             title: '타이틀33',
             content: '33입니다'
         }]; // 가데이터
-    const comments = [{
-        id: 1,
-        cmt: [1, 2]
-    }, {
-        id: 2,
-        cmt: [1]
-    }];
+
     const data = '노래하며 능히 그들을 있는 따뜻한 역사를 봄날의 있는 것이다. \n 뭇 군영과 내려온 봄바람을 우는 가는 사막이다. 밥을 때에, 천고에 희망의 우리의 듣기만 얼마나 놀이 것이다. 있는 예수는 있음으로써 용감하고 보배를 피다. 청춘이 발휘하기 창공에 남는 아름다우냐? 것은 발휘하기 구하지 더운지라 할지니, 있음으로써 피어나기 너의 몸이 철환하였는가? 인간의 없으면, 이것을 간에 우리 그들의 주며, 피다. 뜨고, 속잎나고, 대고, 남는 듣기만 몸이 이것은 사막이다. 이는 소리다.이것은 힘차게 크고 인간에 발휘하기 군영과 황금시대를 밥을 봄바람이다. 사라지지 주며, 쓸쓸한 아름다우냐? 얼음과 보내는 같으며, 힘차게 피어나기 칼이다.\n';
     const prePost = '001';
     const nextPost = '002';
-
-    const params = useParams();
-
 
     return (
         <div className="w-full flex justify-center items-center fadein">
@@ -124,20 +139,17 @@ export default function PostDetailPage() {
                 {/*댓글작성*/}
                 <div className="w-full gap-2 flex flex-col">
                     <div className="font-bold">N개의 댓글</div>
-                    <textarea
-                        className="w-full h-32 border border-gray-200 rounded-md py-1.5 px-2 resize-none focus:outline-none" />
+                    <textarea onChange={(e) => {setComment(e.target.value);}} value={comment} className="w-full h-32 border border-gray-200 rounded-md py-1.5 px-2 resize-none focus:outline-none" />
                     <div className="flex justify-end">
-                        <button
-                            className="font-bold w-24 justify-center rounded-md py-1 px-2 flex bg-blue-500 hover:bg-blue-400 text-white">댓글
-                            작성
-                        </button>
+                        <button onClick={postComment}
+                                className="font-bold w-24 justify-center rounded-md py-1 px-2 flex bg-blue-500 hover:bg-blue-400 text-white">댓글 작성</button>
                     </div>
                 </div>
 
                 {/*댓글목록*/}
                 <div className="mb-10">
                     {
-                        comments.map((item) => <CommentItem key={item.id} item={item.cmt} />)
+                        comments.map((item) => <CommentItem key={item.comment_id} items={item}/>)
                     }
                 </div>
 
