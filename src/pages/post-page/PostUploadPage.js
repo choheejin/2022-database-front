@@ -8,14 +8,34 @@ export default function PostUploadPage({ isVisible }) {
     const [isModified, setIsModified] = useState(false);
     const [isPublic, setIsPublic] = useState(true);
 
+    // cat image
+    const sample = "https://cataas.com/cat";
+    const [mainCat, setMaincat] = useState(sample);
+    const bg_url = "url(" + mainCat + ")";
+
     const onSubmit = () => {
 
     };
 
+    const fetchCat = async () => {
+        const OPEN_API_DOMAIN = "https://cataas.com";
+        const response = await fetch(`${OPEN_API_DOMAIN}/cat?json=true`);
+        const responseJson = await response.json();
+        return `${OPEN_API_DOMAIN}/${responseJson.url}`;
+    };
+
+    async function updateMainCat() {
+        const newCat = await fetchCat();
+        setMaincat(newCat);
+        console.log("냐옹");
+    }
+
     return (
         <div className="grid grid-cols-2 h-screen fadein">
-            <div className={`flex w-full bg-no-repeat bg-center bg-contain h-auto bg-stone-900 bg-[url('sample.jpeg')]`}>
-                <div className="flex w-full h-full items-end justify-end px-4 py-4">
+            <div className="flex w-full bg-no-repeat bg-center bg-contain h-auto bg-stone-900"
+                style={{ backgroundImage: `${bg_url}` }}>
+                <div className="flex w-full h-full items-end justify-end px-4 py-4"
+                    onClick={() => updateMainCat()}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                         stroke="white" className="w-6 h-6 cursor-pointer w-6 h-6 cursor-pointer animate-pulse origin-center hover:animate-spin">
                         <path strokeLinecap="round" strokeLinejoin="round"
@@ -26,6 +46,7 @@ export default function PostUploadPage({ isVisible }) {
 
             <form className="flex flex-col">
                 <input placeholder="제목"
+                    name="title"
                     className="text-2xl font-bold focus:outline-none bg-transparent pl-8 pt-10 mb-3" />
 
                 <div className="flex w-full pl-8 mb-3 text-sm">
@@ -47,6 +68,7 @@ export default function PostUploadPage({ isVisible }) {
                 </div>
 
                 <textarea placeholder="본문을 입력해주세요"
+                    name="content"
                     className="bg-transparent focus:outline-none resize-none h-full pl-8 pt-1 mb-2.5" />
                 <div className="flex justify-between items-center bg-stone-700 py-2.5 px-3">
                     <a href="/" className="flex gap-1 text-white font-bold hover:bg-stone-500 rounded-md px-3.5 py-1.5">
