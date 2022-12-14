@@ -1,39 +1,28 @@
 import PostItem from "./post-page/components/PostItem";
-import {useState} from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function MainPage() {
     const [tab, setTab] = new useState(1);
+    const [articles, setArticles] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const params = useParams();
 
-    const n = [
-    {
-        id: 1,
-        url: 'images/sample.jpeg',
-        title: '타이틀11',
-        content: '11입니다'
-    }, {
-        id: 2,
-        url: 'images/sample22.jpeg',
-        title: '타이틀22',
-        content: '22입니다'
-    }, {
-        id: 3,
-        url: 'images/sample.jpeg',
-        title: '타이틀33',
-        content: '33입니다'
-    }, {
-            id: 4,
-            url: 'images/sample22.jpeg',
-            title: '타이틀44',
-            content: '44입니다'
-        },
-        {
-            id: 5,
-            url: 'images/sample.jpeg',
-            title: '타이틀55',
-            content: '55입니다'
-        }]; // 가데이터
+    const getArticles = async () => {
+        return await axios.get(process.env.REACT_APP_API_URL + '/articles');
+    }
 
-    return(
+    useEffect(() => {
+        getArticles().then(response => {
+            if (response.data.status === 200) {
+                setArticles(response.data.response);
+                setLoading(false);
+            }
+        });
+    }, [loading]);
+
+    return (
         <div className="w-full flex justify-center">
             <div className="w-[75%] mt-3 ">
                 <div className="flex gap-2 mb-5 text-lg font-semibold mb-7">
@@ -45,7 +34,7 @@ function MainPage() {
 
                 <div className=" grid grid-cols-3 gap-5 items-center justify-center">
                     {
-                        n.map( (item) => <PostItem item={item} key={item.id}/> )
+                        articles.map((item) => <PostItem item={item} key={item.article_id} />)
                     }
                 </div>
             </div>
