@@ -6,21 +6,19 @@ import axios from "axios";
 function MainPage() {
     const [tab, setTab] = new useState(1);
     const [articles, setArticles] = useState([]);
-    const [loading, setLoading] = useState(false);
     const params = useParams();
 
     const getArticles = async () => {
-        return await axios.get(process.env.REACT_APP_API_URL + '/articles');
+        return await axios.get(process.env.REACT_APP_API_URL + '/articles/' + tab);
     }
 
     useEffect(() => {
         getArticles().then(response => {
             if (response.data.status === 200) {
                 setArticles(response.data.response);
-                setLoading(false);
             }
         });
-    }, [loading]);
+    }, [tab]);
 
     return (
         <div className="w-full flex justify-center">
@@ -38,7 +36,7 @@ function MainPage() {
                     }
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
