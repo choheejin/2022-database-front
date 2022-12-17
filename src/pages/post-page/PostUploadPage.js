@@ -24,6 +24,8 @@ export default function PostUploadPage({ isVisible }) {
     const [mainCat, setMaincat] = useState(sample);
     const bg_url = "url(" + mainCat + ")";
 
+    const [userInfo, setUserInfo] = useState({});
+
     const onSubmit = () => {
 
     };
@@ -53,15 +55,25 @@ export default function PostUploadPage({ isVisible }) {
 
     const postContent = () => {
         // 넘겨줘야 할 것: title, thumbnail, content, is_public, user_id, type_id
-        axios.post(process.env.REACT_APP_API_URL + '/article/post', { title: title, thumbnail: mainCat, content: content, is_public: isPublic, user_id: 'dd', type_id: category }).then(response => {
+        axios.post(process.env.REACT_APP_API_URL + '/article/post', { title: title, thumbnail: mainCat, content: content, is_public: isPublic, user_id: userInfo.id, type_id: category }).then(response => {
             setLoading(true);
             isVisible(true);
             navigate('/');
         })
     }
 
+    const getUserInfo = async () => {
+        return await axios.get(process.env.REACT_APP_API_URL + '/my-page/' + localStorage.getItem('db-user_id'));
+    };
+
     useEffect(() => {
         updateMainCat();
+
+        if (localStorage.getItem('db-user_id')) {
+            getUserInfo().then(response => {
+                setUserInfo(response.data.response);
+            });
+        }
     }, []);
 
     // useEffect(() => {
