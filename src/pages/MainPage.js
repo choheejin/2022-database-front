@@ -2,11 +2,15 @@ import PostItem from "./post-page/components/PostItem";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Pagination from 'react-js-pagination'
+import styled from 'styled-components'
 
 function MainPage() {
     const [tab, setTab] = new useState(1);
     const [articles, setArticles] = useState([]);
+    const [page, setPage] = useState(1);
     const [search, setSearch] = useState("");
+    const [items, setItems] = useState(6);
     const params = useParams();
 
     const getArticles = async () => {
@@ -16,6 +20,8 @@ function MainPage() {
     const getSearch = async () => {
         return await axios.get(process.env.REACT_APP_API_URL + '/articles/' + tab + '/search/' + search);
     }
+
+    const handlePageChange = (page) => { setPage(page); };
 
     useEffect(() => {
         getArticles().then(response => {
@@ -44,6 +50,29 @@ function MainPage() {
             });
         }
     }, [search]);
+
+    const PaginationBox = styled.div`
+    .pagination { display: flex; justify-content: center; margin-top: 3em;}
+    ul { list-style: none; padding: 0; }
+    ul.pagination li {
+      display: inline-block;
+      width: 2em;
+      height: 2em;
+      border-radius: 1em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem; 
+      margin: 0.2em;
+    }
+    ul.pagination li:first-child{ border-radius: 5px 0 0 5px; }
+    ul.pagination li:last-child{ border-radius: 0 5px 5px 0; }
+    ul.pagination li a { text-decoration: none; color: #3B82F6; font-size: 1em; }
+    ul.pagination li.active a { color: white; }
+    ul.pagination li.active { background-color: #3B82F6; }
+    ul.pagination li:hover { border: solid 1px #3B82F6; }
+    ul.pagination li a.active { color: blue; }
+  `
 
     return (
         <div className="w-full flex justify-center">
@@ -83,8 +112,33 @@ function MainPage() {
 
                 <div className=" grid grid-cols-3 gap-5 items-center justify-center">
                     {
-                        articles.map((item) => <PostItem item={item} key={item.article_id} />)
+                        // articles.map((item) => <PostItem item={item} key={item.article_id} />)
                     }
+                    {
+                        articles.slice(
+                            items * (page - 1),
+                            items * (page - 1) + items
+                        ).map((v, i) => {
+                            return (
+                                <div key={i}>
+                                    <PostItem item={v} key={v.article_id} />
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                <div className="clear-right"></div>
+
+                <div>
+                    <PaginationBox>
+                        <Pagination
+                            activePage={page}
+                            itemsCountPerPage={items}
+                            totalItemsCount={articles.length}
+                            pageRangeDisplayed={5}
+                            onChange={handlePageChange}>
+                        </Pagination>
+                    </PaginationBox>
                 </div>
             </div>
         </div >
