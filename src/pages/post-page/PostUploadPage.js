@@ -1,13 +1,15 @@
 import '../../customAnimation.css';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function PostUploadPage({ isVisible }) {
+export default function PostUploadPage(props) {
+
+    const { isVisible } = props;
 
     isVisible(false);
 
-    const [isModified, setIsModified] = useState(false);
+    const [isUpdate, setIsUpdate] = useState(false);
     const [isPublic, setIsPublic] = useState(1);
 
     // title, category, content
@@ -18,6 +20,7 @@ export default function PostUploadPage({ isVisible }) {
     const [loading, setLoading] = useState(false);
     const params = useParams();
     const navigate = new useNavigate();
+    const location = useLocation();
 
     // cat image == thumbnail
     const sample = "https://cataas.com//cat/y1sAMOXPczgTIVR1";
@@ -25,10 +28,6 @@ export default function PostUploadPage({ isVisible }) {
     const bg_url = "url(" + mainCat + ")";
 
     const [userInfo, setUserInfo] = useState({});
-
-    const onSubmit = () => {
-
-    };
 
     const fetchCat = async () => {
         const OPEN_API_DOMAIN = "https://cataas.com";
@@ -40,7 +39,6 @@ export default function PostUploadPage({ isVisible }) {
     async function updateMainCat() {
         const newCat = await fetchCat();
         setMaincat(newCat);
-        console.log(newCat);
     }
 
     const handleChangeCategory = (e) => {
@@ -55,9 +53,9 @@ export default function PostUploadPage({ isVisible }) {
 
     const postContent = () => {
         // 넘겨줘야 할 것: title, thumbnail, content, is_public, user_id, type_id
+        isVisible(true);
         axios.post(process.env.REACT_APP_API_URL + '/article/post', { title: title, thumbnail: mainCat, content: content, is_public: isPublic, user_id: userInfo.id, type_id: category }).then(response => {
             setLoading(true);
-            isVisible(true);
             navigate('/');
         })
     }
@@ -66,13 +64,34 @@ export default function PostUploadPage({ isVisible }) {
         return await axios.get(process.env.REACT_APP_API_URL + '/my-page/' + localStorage.getItem('db-user_id'));
     };
 
-    useEffect(() => {
-        updateMainCat();
+    const updateContent = () => {
+        isVisible(true);
+        axios.put(process.env.REACT_APP_API_URL + '/article/update/' + location.state.postData.article_id, { title: title, thumbnail: mainCat, content: content, is_public: isPublic, type_id: category }).then(response => {
+            if (response.status === 200) {
+                // console.log(response);
+                setLoading(true);
+                navigate('/');
+            }
+        });
+    };
 
+    useEffect(() => {
         if (localStorage.getItem('db-user_id')) {
             getUserInfo().then(response => {
                 setUserInfo(response.data.response);
             });
+        }
+
+        // console.log(location.key);
+        if (location.key === "default") {
+            updateMainCat();
+        }
+        else {
+            console.log(location.state.postData);
+            setIsUpdate(true);
+            setTitle(location.state.postData.title);
+            setContent(location.state.postData.a_content);
+            setMaincat(location.state.postData.a_thumbnail);
         }
     }, []);
 
@@ -168,11 +187,11 @@ export default function PostUploadPage({ isVisible }) {
                         </svg>
                         나가기
                     </a>
-                    <button onClick={postContent}
+                    <button onClick={isUpdate ? updateContent : postContent}
                         id="submit"
                         type="button"
                         className="bg-blue-500 hover:bg-blue-400 rounded-md text-white px-4 py-1.5 font-bold">
-                        {isModified ? '수정하기' : '작성하기'}</button>
+                        {isUpdate ? '수정하기' : '작성하기'}</button>
                 </div>
             </form>
         </div>
