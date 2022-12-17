@@ -2,6 +2,7 @@ import PostItem from "./post-page/components/PostItem";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import DataSearch from "../components/DataSearch";
 
 function MainPage() {
     const [tab, setTab] = new useState(1);
@@ -29,6 +30,8 @@ function MainPage() {
                     <div onClick={() => setTab(3)} className={`px-5 cursor-pointer select-none pb-1 ${tab === 3 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>질문</div>
                     <div onClick={() => setTab(4)} className={`px-5 cursor-pointer select-none pb-1  ${tab === 4 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>최근 본 게시글</div>
                 </div>
+
+                <DataSearch />
 
                 <div className=" grid grid-cols-3 gap-5 items-center justify-center">
                     {
