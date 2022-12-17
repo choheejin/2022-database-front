@@ -65,7 +65,7 @@ export default function PostDetailPage() {
                 </div>
 
                 {/*작성자*/}
-                <PostWriter name={'작성자'} url={'../../images/sample22.jpeg'} />
+                <PostWriter name={postData.a_user} url={'profile_cat.png'}/>
 
                 {/*이전포스트*/}
                 <div className="w-full flex gap-2">
@@ -121,7 +121,6 @@ export default function PostDetailPage() {
                     }
                 </div>
 
-                {/*/!*추천게시글*!/*/}
                 {/*<div className="grid grid-cols-3 gap-4 mb-36">*/}
                 {/*    {*/}
                 {/*        n.map((item) => <PostItem item={item} />)*/}
