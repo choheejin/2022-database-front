@@ -9,11 +9,20 @@ export default function PostListPage() {
     const params = useParams();
 
     const getMyPosts = async () => {
-        return await axios.get(process.env.REACT_APP_API_URL + '/articles/user/' + params.key).then((response) => {
-            if(response.status === 200) {
-                setPostList(response.data.response);
-            }
-        });
+        const user = localStorage.getItem('db-user_id');
+        if(params.key === user){
+            return await axios.get(process.env.REACT_APP_API_URL + '/articles/user/' + params.key).then((response) => {
+                if(response.status === 200) {
+                    setPostList(response.data.response);
+                }
+            });
+        } else {
+            return await axios.get(process.env.REACT_APP_API_URL + '/articles/non-user/' + params.key).then((response) => {
+                if(response.status === 200) {
+                    setPostList(response.data.response);
+                }
+            });
+        }
     }
 
     useEffect(() => {
@@ -28,7 +37,7 @@ export default function PostListPage() {
             <div className="w-[55%]  flex flex-col gap-8 mb-20">
                 <div className="mt-16">
                     {
-                        postList.length > 0 ? postList.map(item => <MyPostItem key={item.article_id} item={item} />) : <></>
+                        postList.length > 0 ? postList.map(item => <MyPostItem key={item.article_id} user={params.key} item={item} />) : <></>
                     }
                 </div>
             </div>
