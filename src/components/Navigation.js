@@ -12,10 +12,10 @@ function Navigation() {
         }
 
         window.addEventListener('scroll', handleScroll);
+
         return () => {
             window.removeEventListener('scroll', handleScroll)
         }
-
     }, []);
 
     const handleScroll = () => {
