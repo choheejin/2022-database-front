@@ -9,6 +9,7 @@ export default function PostDetailPage() {
     const [comment, setComment] = useState('');
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [posting, setPosting] = useState(false);
     const params = useParams();
     const navigate = useNavigate();
 
@@ -17,34 +18,34 @@ export default function PostDetailPage() {
             if(response.data.status === 200) {
                 setPostData(response.data.response);
             }
+            setLoading(false);
         });
     };
 
     const getComments = async () => {
-        return await axios.get(process.env.REACT_APP_API_URL + '/comments/' + params.key);
+        return await axios.get(process.env.REACT_APP_API_URL + '/comments/' + params.key).then((response)=>{
+            if(response.data.status === 200){
+                setComments(response.data.response);
+            }
+        });
     };
 
     const postComment = () => {
-        axios.post(process.env.REACT_APP_API_URL + '/comment/post', {content: comment, user_id: 'dd', article_id: params.key}).then(response => {
-            setLoading(true);
+        axios.post(process.env.REACT_APP_API_URL + '/comment/post', {content: comment, user_id: localStorage.getItem('db-user_id'), article_id: params.key}).then(response => {
+            setPosting(!posting);
         })
     };
 
     useEffect(() => {
-        getArticle().then(() => {
-            setLoading(false);
-        });
-
-        getComments().then(response => {
-            if(response.data.status === 200){
-                setComments(response.data.response);
-                setLoading(false);
-            }
-        });
+        getArticle();
     },[loading]);
 
+    useEffect(() => {
+        getComments();
+    }, [posting]);
+
     return (
-        <div className="w-full flex justify-center items-center fadein">
+        <div className="w-full flex justify-center items-center fadein pb-44">
             <div className="w-[60%] flex flex-col gap-8">
 
                 {/*글내용*/}
@@ -70,7 +71,7 @@ export default function PostDetailPage() {
                 <div className="w-full flex gap-2">
                     {postData.preArticle ?
                         <div className="flex w-1/2 bg-gray-200 cursor-pointer">
-                            <div onClick={() => {navigate('/post/detail/'+postData.preArticle.article_id); setLoading(true);}}
+                            <div onClick={() => {navigate('/post/detail/'+postData.preArticle.article_id);}}
                                  className="flex px-3 py-3.5 items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      strokeWidth="1.3"
@@ -87,7 +88,7 @@ export default function PostDetailPage() {
 
                     {postData.nxtArticle ?
                         <div className="flex w-1/2 bg-gray-200 justify-end cursor-pointer">
-                            <div onClick={() => {navigate('/post/detail/'+postData.nxtArticle.article_id); setLoading(true);}}
+                            <div onClick={() => {navigate('/post/detail/'+postData.nxtArticle.article_id);}}
                                  className="flex p-2 items-center gap-2">
                                 <div className="text-end">
                                     <div className="text-sm">다음 포스트</div>
@@ -108,7 +109,7 @@ export default function PostDetailPage() {
                     <div className="font-bold">{comments.length} 개의 댓글</div>
                     <textarea onChange={(e) => {setComment(e.target.value);}} value={comment} className="w-full h-32 border border-gray-200 rounded-md py-1.5 px-2 resize-none focus:outline-none" />
                     <div className="flex justify-end">
-                        <button onClick={postComment}
+                        <button onClick={()=> {postComment(); setComment('');}}
                                 className="font-bold w-24 justify-center rounded-md py-1 px-2 flex bg-blue-500 hover:bg-blue-400 text-white">댓글 작성</button>
                     </div>
                 </div>
@@ -116,7 +117,7 @@ export default function PostDetailPage() {
                 {/*댓글목록*/}
                 <div className="mb-10">
                     {
-                        comments.map((item) => <CommentItem key={item.comment_id} items={item}/>)
+                        comments.map((item) => <CommentItem key={item.comment_id} setPosting={setPosting} posting={posting} items={item}/>)
                     }
                 </div>
 
