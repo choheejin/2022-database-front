@@ -13,7 +13,7 @@ function App() {
 
     return (
         <div className="bg-gray-50 min-h-screen">
-            {isVisible ? <Navigation isLogin={isLogin}/> : <></>}
+            {isVisible ? <Navigation isLogin={isLogin} setIsLogin={setIsLogin}/> : <></>}
             <Router>
                 <Routes>
                     <Route path="/login" element={<LoginPage isLogin={setIsLogin} />}></Route>
@@ -30,7 +30,7 @@ function App() {
                         path="/"
                         element={<Navigate to="/main" />}
                     />
-                    <Route path="/main" element={<MainPage/>}></Route>
+                    <Route path="/main" element={<MainPage isLogin={isLogin}/>}></Route>
                     <Route path="*" element={<NotFoundPage/>}></Route>
                 </Routes>
             </Router>
