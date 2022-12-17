@@ -6,12 +6,11 @@ function Navigation() {
     const [IsScroll, setIsScroll] = useState(0);
 
     useEffect(() => {
-        if (sessionStorage.getItem('ct-accessToken')) {
+        if (localStorage.getItem('db-user_id')) {
             setIsLogin(1);
-            // 로그인 정보 getMe() 호출하여 user set
+            setUser(localStorage.getItem('db-user_id'));
         }
 
-        setUser('choheejin');
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll)
@@ -38,7 +37,7 @@ function Navigation() {
                 </a>
                 <div>
                     {
-                        IsLogin === 0 ? <div className="flex gap-4"> <a className="duration-[0.2s] hover:text-pink-500" href="/my-page">User 님</a> <a href={'/posts/'+User} className="duration-[0.2s] hover:text-blue-500">내 글목록</a> <a href="/posts/write" className="duration-[0.2s] hover:text-blue-500">글 작성하기</a></div> : <a href="/login">로그인 하기</a>
+                        IsLogin === 1 ? <div className="flex gap-4"> <a className="duration-[0.2s] hover:text-pink-500" href="/my-page">{User}</a> <a href={'/posts/'+User} className="duration-[0.2s] hover:text-blue-500">내 글목록</a> <a href="/posts/write" className="duration-[0.2s] hover:text-blue-500">글 작성하기</a></div> : <a href="/login">로그인 하기</a>
                     }
                 </div>
             </div>
