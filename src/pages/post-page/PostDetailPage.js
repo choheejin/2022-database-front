@@ -70,9 +70,9 @@ export default function PostDetailPage() {
                 {/*이전포스트*/}
                 <div className="w-full flex gap-2">
                     {postData.preArticle ?
-                        <div className="flex w-1/2 bg-gray-200 cursor-pointer">
-                            <div onClick={() => {navigate('/post/detail/'+postData.preArticle.article_id);}}
-                                 className="flex px-3 py-3.5 items-center gap-2">
+                        <div onClick={() => {navigate('/post/detail/'+postData.preArticle.article_id); setLoading(!loading); setPosting(!posting);}}
+                             className="flex w-1/2 bg-gray-200 cursor-pointer">
+                            <div className="flex px-3 py-3.5 items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      strokeWidth="1.3"
                                      stroke="rgb(59 130 246)" className="w-9 h-9">
@@ -87,9 +87,9 @@ export default function PostDetailPage() {
                         </div> : <div className="w-1/2"></div>}
 
                     {postData.nxtArticle ?
-                        <div className="flex w-1/2 bg-gray-200 justify-end cursor-pointer">
-                            <div onClick={() => {navigate('/post/detail/'+postData.nxtArticle.article_id);}}
-                                 className="flex p-2 items-center gap-2">
+                        <div onClick={() => {navigate('/post/detail/'+postData.nxtArticle.article_id); setLoading(!loading); setPosting(!posting); setTimeout(()=>{console.log('멈춤?')},1000);}}
+                             className="flex w-1/2 bg-gray-200 justify-end cursor-pointer">
+                            <div className="flex p-2 items-center gap-2">
                                 <div className="text-end">
                                     <div className="text-sm">다음 포스트</div>
                                     <div className="font-bold">{postData.nxtArticle.title}</div>
