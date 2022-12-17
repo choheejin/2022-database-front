@@ -4,9 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function PostUploadPage(props) {
-
     const { isVisible } = props;
-
     isVisible(false);
 
     const [isUpdate, setIsUpdate] = useState(false);
@@ -53,9 +51,9 @@ export default function PostUploadPage(props) {
 
     const postContent = () => {
         // 넘겨줘야 할 것: title, thumbnail, content, is_public, user_id, type_id
-        isVisible(true);
         axios.post(process.env.REACT_APP_API_URL + '/article/post', { title: title, thumbnail: mainCat, content: content, is_public: isPublic, user_id: userInfo.id, type_id: category }).then(response => {
             setLoading(true);
+            isVisible(true);
             navigate('/');
         })
     }
@@ -70,6 +68,7 @@ export default function PostUploadPage(props) {
             if (response.status === 200) {
                 // console.log(response);
                 setLoading(true);
+                isVisible(true);
                 navigate('/');
             }
         });
