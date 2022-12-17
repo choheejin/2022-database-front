@@ -21,7 +21,9 @@ function App() {
                     <Route path="/my-page" element={<MyPage/>}></Route>
 
                     <Route path="/posts/:key" element={<PostListPage/>}></Route>
-                    <Route path="/post/detail/:key/:key" element={<PostDetailPage/>}></Route>
+                    <Route path="/post/detail/:key" element={<PostDetailPage/>}></Route>
+
+                    <Route path="/post/detail/:key1/:key" element={<PostDetailPage/>}></Route>
                     <Route path="/posts/write" element={<PostUploadPage isVisible={setIsVisible}/>}></Route>
 
                     <Route

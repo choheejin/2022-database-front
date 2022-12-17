@@ -14,15 +14,15 @@ export default function PostDetailPage() {
     const navigate = useNavigate();
 
     const getArticle = async () => {
-        if(params.key === localStorage.getItem('db-user_id')){
-            return await axios.get(process.env.REACT_APP_API_URL + '/article/' + params.key).then(response => {
+        if(params.key1 === localStorage.getItem('db-user_id')){
+            return await axios.get(process.env.REACT_APP_API_URL + '/article/user/' + params.key).then(response => {
                 if(response.data.status === 200) {
                     setPostData(response.data.response);
                 }
                 setLoading(false);
             });
         } else {
-            return await axios.get(process.env.REACT_APP_API_URL + '/public/article/' + params.key).then(response => {
+            return await axios.get(process.env.REACT_APP_API_URL + '/article/non-user/' + params.key).then(response => {
                 if(response.data.status === 200) {
                     setPostData(response.data.response);
                 }
@@ -79,7 +79,7 @@ export default function PostDetailPage() {
                 {/*이전포스트*/}
                 <div className="w-full flex gap-2">
                     {postData.preArticle ?
-                        <div onClick={() => {navigate('/post/detail/'+postData.preArticle.article_id); setLoading(!loading); setPosting(!posting);}}
+                        <div onClick={() => {navigate('/post/detail/'+ postData.a_user + '/' +postData.preArticle.article_id); setLoading(!loading); setPosting(!posting);}}
                              className="flex w-1/2 bg-gray-200 cursor-pointer">
                             <div className="flex px-3 py-3.5 items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -96,7 +96,7 @@ export default function PostDetailPage() {
                         </div> : <div className="w-1/2"></div>}
 
                     {postData.nxtArticle ?
-                        <div onClick={() => {navigate('/post/detail/'+postData.nxtArticle.article_id); setLoading(!loading); setPosting(!posting); setTimeout(()=>{console.log('멈춤?')},1000);}}
+                        <div onClick={() => {navigate('/post/detail/'+ postData.a_user + '/' + postData.nxtArticle.article_id); setLoading(!loading); setPosting(!posting); setTimeout(()=>{console.log('멈춤?')},1000);}}
                              className="flex w-1/2 bg-gray-200 justify-end cursor-pointer">
                             <div className="flex p-2 items-center gap-2">
                                 <div className="text-end">
