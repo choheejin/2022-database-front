@@ -5,7 +5,7 @@ import axios from "axios";
 import Pagination from 'react-js-pagination'
 import styled from 'styled-components'
 
-function MainPage() {
+function MainPage(props) {
     const [tab, setTab] = new useState(1);
     const [articles, setArticles] = useState([]);
     const [page, setPage] = useState(1);
@@ -36,7 +36,7 @@ function MainPage() {
 
     useEffect(() => {
         checkUser();
-    }, []);
+    }, [props.isLogin]);
 
     useEffect(() => {
         getArticles().then(response => {
