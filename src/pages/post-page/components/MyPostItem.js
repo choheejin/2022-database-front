@@ -4,7 +4,7 @@ export default function MyPostItem(props) {
     const navigate = new useNavigate();
 
     const linkToDetail = () => {
-        navigate('/post/detail/'+props.item.article_id);
+        navigate('/post/detail/'+ props.user +'/'+props.item.article_id);
     };
 
     return (
