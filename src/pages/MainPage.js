@@ -11,10 +11,11 @@ function MainPage() {
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState("");
     const [items, setItems] = useState(6);
+    const [User, setUser] = useState("");
     const params = useParams();
 
     const getArticles = async () => {
-        return await axios.get(process.env.REACT_APP_API_URL + '/articles/' + tab + '/user/'+localStorage.getItem('db-user_id'));
+        return await axios.get(process.env.REACT_APP_API_URL + '/articles/' + tab + '/user/' + localStorage.getItem('db-user_id'));
     }
 
     const getSearch = async () => {
@@ -22,6 +23,20 @@ function MainPage() {
     }
 
     const handlePageChange = (page) => { setPage(page); };
+
+    const checkUser = () => {
+        const token = localStorage.getItem('db-user_id');
+        console.log(token);
+        if (token) {
+            setUser(token);
+        } else {
+            setUser('');
+        }
+    };
+
+    useEffect(() => {
+        checkUser();
+    }, []);
 
     useEffect(() => {
         getArticles().then(response => {
@@ -81,7 +96,9 @@ function MainPage() {
                     <div onClick={() => setTab(1)} className={`px-5 cursor-pointer select-none pb-1 ${tab === 1 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>일상</div>
                     <div onClick={() => setTab(2)} className={`px-5 cursor-pointer select-none pb-1 ${tab === 2 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>고민</div>
                     <div onClick={() => setTab(3)} className={`px-5 cursor-pointer select-none pb-1 ${tab === 3 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>질문</div>
-                    <div onClick={() => setTab(4)} className={`px-5 cursor-pointer select-none pb-1  ${tab === 4 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>최근 본 게시글</div>
+                    {
+                        User !== '' ? <div onClick={() => setTab(4)} className={`px-5 cursor-pointer select-none pb-1  ${tab === 4 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>최근 본 게시글</div> : <div></div>
+                    }
                 </div>
 
                 {/* 검색창 */}
