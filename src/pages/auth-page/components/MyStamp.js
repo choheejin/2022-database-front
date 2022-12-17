@@ -1,8 +1,16 @@
+import {useState} from "react";
+import Calendar from 'react-calendar';
+
 export default function MyStamp (props){
+    const [value, onChange] = useState(new Date());
+
     return (
-        <div className="flex flex-col gap-2">
-            <img className="w-16 h-16 object-center object-cover" src={process.env.REACT_APP_PUBLIC_URL + '/images/stamp.png'}/>
-            <label className="text-sm">2022.11.28</label>
+        <div>
+          <Calendar
+            onChange={onChange}
+            value={value}
+          />
+          
         </div>
-    );
+      );
 };
