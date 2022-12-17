@@ -8,19 +8,20 @@ import {useState} from "react";
 
 
 function App() {
+    const [isLogin, setIsLogin] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
 
     return (
         <div className="bg-gray-50 min-h-screen">
-            {isVisible ? <Navigation/> : <></>}
+            {isVisible ? <Navigation isLogin={isLogin}/> : <></>}
             <Router>
                 <Routes>
-                    <Route path="/login" element={<LoginPage/>}></Route>
+                    <Route path="/login" element={<LoginPage isLogin={setIsLogin} />}></Route>
                     <Route path="/signup" element={<SignupPage/>}></Route>
                     <Route path="/my-page" element={<MyPage/>}></Route>
 
                     <Route path="/posts/:key" element={<PostListPage/>}></Route>
-                    <Route path="/post/detail/:key" element={<PostDetailPage/>}></Route>
+                    <Route path="/post/detail/:key/:key" element={<PostDetailPage/>}></Route>
                     <Route path="/posts/write" element={<PostUploadPage isVisible={setIsVisible}/>}></Route>
 
                     <Route

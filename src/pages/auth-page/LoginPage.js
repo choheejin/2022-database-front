@@ -3,7 +3,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import React from "react";
 
-function LoginPage() {
+function LoginPage(props) {
     const [userID, setUserID] = new useState('');
     const [password, setPassword] = new useState('');
     const [isSubmit, setIsSubmit] = new useState(false);
@@ -18,13 +18,7 @@ function LoginPage() {
             'id': userID,
             'pw': password
         };
-        console.log(userID, password);
 
-        
-        console.log(
-        "LoginForm:window.sessionStorage(id) =>",
-        window.sessionStorage.getItem("id")
-        );
         axios
             .post(process.env.REACT_APP_API_URL + '/login', logindata)
             .then( response => {
@@ -33,7 +27,7 @@ function LoginPage() {
                     
                     alert('로그인에 성공하셨습니다.');
                     localStorage.setItem("db-user_id", logindata.id);
-                    
+                    props.isLogin(true);
                     navigate('/main');
                 }
                 else {

@@ -14,7 +14,7 @@ function MainPage() {
     const params = useParams();
 
     const getArticles = async () => {
-        return await axios.get(process.env.REACT_APP_API_URL + '/articles/' + tab);
+        return await axios.get(process.env.REACT_APP_API_URL + '/articles/' + tab + '/user/'+localStorage.getItem('db-user_id'));
     }
 
     const getSearch = async () => {

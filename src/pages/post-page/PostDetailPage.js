@@ -14,12 +14,21 @@ export default function PostDetailPage() {
     const navigate = useNavigate();
 
     const getArticle = async () => {
-        return await axios.get(process.env.REACT_APP_API_URL + '/article/' + params.key).then(response => {
-            if(response.data.status === 200) {
-                setPostData(response.data.response);
-            }
-            setLoading(false);
-        });
+        if(params.key === localStorage.getItem('db-user_id')){
+            return await axios.get(process.env.REACT_APP_API_URL + '/article/' + params.key).then(response => {
+                if(response.data.status === 200) {
+                    setPostData(response.data.response);
+                }
+                setLoading(false);
+            });
+        } else {
+            return await axios.get(process.env.REACT_APP_API_URL + '/public/article/' + params.key).then(response => {
+                if(response.data.status === 200) {
+                    setPostData(response.data.response);
+                }
+                setLoading(false);
+            });
+        }
     };
 
     const getComments = async () => {

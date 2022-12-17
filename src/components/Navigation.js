@@ -1,26 +1,33 @@
 import { useEffect, useState } from "react";
 
-function Navigation() {
-    const [IsLogin, setIsLogin] = useState(0);
-    const [User, setUser] = useState('');
+function Navigation(props) {
+    const [User, setUser] = useState("");
     const [IsScroll, setIsScroll] = useState(0);
 
     useEffect(() => {
-        if (localStorage.getItem('db-user_id')) {
-            setIsLogin(1);
-            setUser(localStorage.getItem('db-user_id'));
-        }
+        checkUser();
+    }, [props.isLogin]);
 
+    useEffect(() => {
         window.addEventListener('scroll', handleScroll);
 
         return () => {
-            window.removeEventListener('scroll', handleScroll)
+            window.removeEventListener('scroll', handleScroll);
         }
     }, []);
 
+    const checkUser = () => {
+        const token = localStorage.getItem('db-user_id');
+        console.log(token);
+        if(token){
+            setUser(token);
+        } else {
+            setUser('');
+        }
+    };
+
     const handleScroll = () => {
         const scrollPosition = window.pageYOffset;
-        console.log(scrollPosition);
         if (scrollPosition === 0) {
             setIsScroll(0);
         } else {
@@ -37,7 +44,7 @@ function Navigation() {
                 </a>
                 <div>
                     {
-                        IsLogin === 1 ? <div className="flex gap-4"> <a className="duration-[0.2s] hover:text-pink-500" href="/my-page">{User}</a> <a href={'/posts/'+User} className="duration-[0.2s] hover:text-blue-500">내 글목록</a> <a href="/posts/write" className="duration-[0.2s] hover:text-blue-500">글 작성하기</a></div> : <a href="/login">로그인 하기</a>
+                        User !== ''? <div className="flex gap-4"> <a className="duration-[0.2s] hover:text-pink-500" href="/my-page">{User}</a> <a href={'/posts/'+User} className="duration-[0.2s] hover:text-blue-500">내 글목록</a> <a href="/posts/write" className="duration-[0.2s] hover:text-blue-500">글 작성하기</a><a className="cursor-pointer" onClick={() => { localStorage.clear(); setUser('');}}>로그아웃</a></div> : <a href="/login">로그인 하기</a>
                     }
                 </div>
             </div>
