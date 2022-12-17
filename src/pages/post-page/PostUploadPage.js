@@ -59,6 +59,10 @@ export default function PostUploadPage({ isVisible }) {
         })
     }
 
+    useEffect(() => {
+        updateMainCat();
+    }, []);
+
     // useEffect(() => {
     //     getContent().then(response => {
     //         if (response.data.status === 200) {
