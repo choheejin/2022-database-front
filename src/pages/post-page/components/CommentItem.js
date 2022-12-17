@@ -5,12 +5,11 @@ export default function CommentItem(props) {
     const [pressUpdate, setPressUpdate] = useState(false);
     const [updateContent, setUpdateContent] = useState('');
     const [user, setUser] = useState(localStorage.getItem('db-user_id'));
-    const [content, setContent] = useState(props.items.content);
 
     const updateComment = () => {
         axios.put(process.env.REACT_APP_API_URL + '/comment/update/' + props.items.comment_id, {content: updateContent}).then(response => {
             if(response.status === 200){
-                setContent(response.data.response.content);
+                props.setPosting(!props.posting);
             }
         });
     };
@@ -54,7 +53,7 @@ export default function CommentItem(props) {
                                     className="font-bold w-24 justify-center rounded-md py-1 px-2 flex bg-blue-500 hover:bg-blue-400 text-white">수정 완료</button>
                         </div>
                     </div>
-                    :  <div className="">{content}</div>
+                    :  <div className="">{props.items.content}</div>
             }
 
 
