@@ -77,7 +77,7 @@ function MainPage() {
     return (
         <div className="w-full flex justify-center">
             <div className="w-[75%] mt-3 mb-32">
-                <div className="flex gap-2 mb-5 text-lg font-semibold mb-7">
+                <div className="flex gap-2 mb-3 text-lg font-semibold mb-7">
                     <div onClick={() => setTab(1)} className={`px-5 cursor-pointer select-none pb-1 ${tab === 1 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>일상</div>
                     <div onClick={() => setTab(2)} className={`px-5 cursor-pointer select-none pb-1 ${tab === 2 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>고민</div>
                     <div onClick={() => setTab(3)} className={`px-5 cursor-pointer select-none pb-1 ${tab === 3 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>질문</div>
@@ -86,7 +86,7 @@ function MainPage() {
 
                 {/* 검색창 */}
                 <div>
-                    <div className={`float-right w-[25%] focus:outline-none border-[1px] border-blue-500 rounded-md p-1 m-1 mb-6`}
+                    <div className={`float-right w-[25%] focus:outline-none border-[1.5px] border-gray-400 rounded-full px-1 py-0.5 mb-8`}
                         onSubmit={(e) => { getSearch(); }}>
                         <table>
                             <tr>
@@ -100,7 +100,7 @@ function MainPage() {
                                     <input type="text"
                                         name="id"
                                         placeholder="검색어를 입력하세요"
-                                        className={`w-full p-1 m-1 text-sm`}
+                                        className={`w-full px-1 py-0.5 m-1 text-sm bg-transparent focus:outline-none`}
                                         onChange={(e) => { setSearch(e.target.value); }} value={search} />
                                 </td>
                             </tr>
@@ -120,7 +120,7 @@ function MainPage() {
                             items * (page - 1) + items
                         ).map((v, i) => {
                             return (
-                                <div key={i}>
+                                <div className="w-full h-full" key={i}>
                                     <PostItem item={v} key={v.article_id} />
                                 </div>
                             )
