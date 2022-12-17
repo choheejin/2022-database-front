@@ -22,11 +22,15 @@ function MainPage() {
         return await axios.get(process.env.REACT_APP_API_URL + '/articles/' + tab + '/search/' + search);
     }
 
+    const getHistory = async () => {
+        return await axios.get(process.env.REACT_APP_API_URL + '/articles/history/' + User);
+    }
+
     const handlePageChange = (page) => { setPage(page); };
 
     const checkUser = () => {
         const token = localStorage.getItem('db-user_id');
-        console.log(token);
+        // console.log(token);
         if (token) {
             setUser(token);
         } else {
@@ -39,12 +43,21 @@ function MainPage() {
     }, []);
 
     useEffect(() => {
-        getArticles().then(response => {
-            if (response.data.status === 200) {
-                setArticles(response.data.response);
-                // console.log(response.data.response);
-            }
-        });
+        if (tab === 4) {
+            getHistory().then(response => {
+                if (response.data.status === 200) {
+                    setArticles(response.data.response);
+                }
+            });
+        }
+        else {
+            getArticles().then(response => {
+                if (response.data.status === 200) {
+                    setArticles(response.data.response);
+                    // console.log(response.data.response);
+                }
+            });
+        }
     }, [tab]);
 
     useEffect(() => {

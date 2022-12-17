@@ -50,12 +50,29 @@ export default function PostDetailPage() {
         return await axios.get(process.env.REACT_APP_API_URL + '/my-page/' + localStorage.getItem('db-user_id'));
     };
 
+    const postHistory = () => {
+        axios.post(process.env.REACT_APP_API_URL + '/articles/history/post', { user_id: localStorage.getItem('db-user_id'), article_id: params.key }).then(response => {
+            setLoading(true);
+        })
+    }
+
+    const updateHistory = () => {
+        axios.put(process.env.REACT_APP_API_URL + '/articles/history/update/' + params.key, { user_id: localStorage.getItem('db-user_id') }).then(response => {
+            if (response.status === 200) {
+                setLoading(true);
+            }
+        });
+    };
+
     useEffect(() => {
         if (localStorage.getItem('db-user_id')) {
             getUserInfo().then(response => {
                 setUserInfo(response.data.response);
             });
         }
+
+        postHistory();
+        updateHistory();
     }, []);
 
     useEffect(() => {
