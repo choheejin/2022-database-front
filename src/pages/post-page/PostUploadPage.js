@@ -55,6 +55,7 @@ export default function PostUploadPage({ isVisible }) {
         // 넘겨줘야 할 것: title, thumbnail, content, is_public, user_id, type_id
         axios.post(process.env.REACT_APP_API_URL + '/article/post', { title: title, thumbnail: mainCat, content: content, is_public: isPublic, user_id: 'dd', type_id: category }).then(response => {
             setLoading(true);
+            isVisible(true);
             navigate('/');
         })
     }

@@ -47,7 +47,7 @@ function MainPage() {
 
     return (
         <div className="w-full flex justify-center">
-            <div className="w-[75%] mt-3 ">
+            <div className="w-[75%] mt-3 mb-32">
                 <div className="flex gap-2 mb-5 text-lg font-semibold mb-7">
                     <div onClick={() => setTab(1)} className={`px-5 cursor-pointer select-none pb-1 ${tab === 1 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>일상</div>
                     <div onClick={() => setTab(2)} className={`px-5 cursor-pointer select-none pb-1 ${tab === 2 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>고민</div>
