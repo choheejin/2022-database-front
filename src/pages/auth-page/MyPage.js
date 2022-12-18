@@ -4,12 +4,6 @@ import { MyBadge, MyStamp } from "./components";
 
 export default function MyPage() {
   const [userInfo, setUserInfo] = useState({});
-  // const userInfo = {
-  //     title: '고마운 분',
-  //     name : 'choheejin',
-  //     badge: [],
-  //     attendance: []
-  // };
 
   const getUserInfo = async () => {
     return await axios.get(
@@ -95,8 +89,8 @@ export default function MyPage() {
           </div>
         </div>
         <div>
-          <div className="font-bold mb-4">출석보드</div>
-          <div className="grid grid-cols-7">
+          <div className="font-bold mb-4">오늘의 출석 냥스탬프</div>
+          <div className="grid">
             <MyStamp />
           </div>
         </div>
