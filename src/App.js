@@ -13,8 +13,8 @@ function App() {
 
     return (
         <div className="bg-gray-50 min-h-screen">
-            {isVisible ? <Navigation isLogin={isLogin} setIsLogin={setIsLogin}/> : <></>}
             <Router>
+                {isVisible ? <Navigation isLogin={isLogin} setIsLogin={setIsLogin}/> : <></>}
                 <Routes>
                     <Route path="/login" element={<LoginPage setIsLogin={setIsLogin} />}></Route>
                     <Route path="/signup" element={<SignupPage/>}></Route>

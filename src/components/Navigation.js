@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import {useNavigate} from "react-router-dom";
 
 function Navigation(props) {
     const [User, setUser] = useState("");
     const [IsScroll, setIsScroll] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         checkUser();
@@ -44,7 +46,9 @@ function Navigation(props) {
                 </a>
                 <div>
                     {
-                        User !== ''? <div className="flex gap-4"> <a className="duration-[0.2s] hover:text-pink-500" href="/my-page">{User}</a> <a href={'/posts/'+User} className="duration-[0.2s] hover:text-blue-500">내 글목록</a> <a href="/posts/write" className="duration-[0.2s] hover:text-blue-500">글 작성하기</a><a className="cursor-pointer" onClick={() => { localStorage.clear(); setUser(''); props.setIsLogin(false);}}>로그아웃</a></div> : <a href="/login">로그인 하기</a>
+                        User !== ''?
+                            <div className="flex gap-4"> <a className="duration-[0.2s] hover:text-pink-500" href="/my-page">{User}</a> <a href={'/posts/'+User} className="duration-[0.2s] hover:text-blue-500">내 글목록</a> <a href="/posts/write" className="duration-[0.2s] hover:text-blue-500">글 작성하기</a><a className="cursor-pointer" onClick={() => { localStorage.clear(); setUser(''); props.setIsLogin(false); navigate('/main');}}>로그아웃</a></div>
+                            : <a href="/login">로그인 하기</a>
                     }
                 </div>
             </div>
