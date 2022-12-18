@@ -7,19 +7,16 @@ export default function MyBadge(props) {
   const [loading, setLoading] = useState(false);
 
   const getMyAttendance = async () => {
-    return await axios.get(
-      process.env.REACT_APP_API_URL +
-        "/mybadge/" +
-        localStorage.getItem("db-user_id")
-    );
+    return await axios.get(process.env.REACT_APP_API_URL + "/mybadge/" + localStorage.getItem("db-user_id")).then(response => {
+        setLoading(true);
+        setAttendanceList(response.data.response);
+    });
   };
 
   useEffect(() => {
     getMyAttendance().then((response) => {
-      setLoading(true);
-      setAttendanceList(response.data.response);
     });
-  }, []);
+  }, [loading]);
 
   return (
     <>
