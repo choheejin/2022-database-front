@@ -122,7 +122,7 @@ function MainPage(props) {
                             <tr>
                                 <td>
                                     <div className="flex w-full h-full items-end justify-end p-1 mx-1">
-                                        <img className="w-[1em] h-[1em] opacity-50 object-cover object-center" src={process.env.REACT_APP_PUBLIC_URL + '/images/search_icon.png'} />
+                                        <img className="w-[1em] h-[1em] opacity-50 object-cover object-center" src={process.env.PUBLIC_URL + '/images/search_icon.png'} />
                                     </div>
                                 </td>
 

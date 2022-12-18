@@ -29,7 +29,7 @@ export default function MyPage() {
         <div className="w-[70%] flex items-center gap-4">
           <img
             className="w-24 h-24 object-cover object-center rounded-full"
-            src={process.env.REACT_APP_PUBLIC_URL + "/profile_cat.png"}
+            src={process.env.PUBLIC_URL + "/profile_cat.png"}
           />
           <div>
             <label className="font-bold text-lg">{userInfo.id}</label>

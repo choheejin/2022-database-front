@@ -6,7 +6,7 @@ export default function PostWriter(props) {
     return (
         <div className="flex flex-col gap-4 px-5 py-2 ">
             <div className="flex border-b border-gray-200 gap-4 pb-4">
-                <img className="w-28 drop-shadow-xl shadow-indigo-100 h-28 object-center object-cover rounded-full" src={process.env.REACT_APP_PUBLIC_URL +'/' + props.url} />
+                <img className="w-28 drop-shadow-xl shadow-indigo-100 h-28 object-center object-cover rounded-full" src={process.env.PUBLIC_URL +'/' + props.url} />
                 <div onClick={() => navigate('/posts/'+props.name)}
                      className="flex cursor-pointer font-bold items-center text-xl">{props.name}</div>
             </div>

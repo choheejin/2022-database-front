@@ -30,7 +30,7 @@ export default function MyBadge(props) {
               <div key={idx} className="">
                 <img
                   className="w-16 object-center object-cover"
-                  src={process.env.REACT_APP_PUBLIC_URL + "/images/badge1.png"}
+                  src={process.env.PUBLIC_URL + "/images/badge1.png"}
                 />
                 <label className="text-sm font-bold drop-shadow-lg">
                   {list.attendance_date.slice(0, 10)}

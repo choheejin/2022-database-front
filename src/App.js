@@ -26,11 +26,7 @@ function App() {
                     <Route path="/post/detail/:key1/:key" element={<PostDetailPage/>}></Route>
                     <Route path="/posts/write" element={<PostUploadPage isVisible={setIsVisible}/>}></Route>
 
-                    <Route
-                        path="/"
-                        element={<Navigate to="/main" />}
-                    />
-                    <Route path="/main" element={<MainPage isLogin={isLogin}/>}></Route>
+                    <Route path="/" element={<MainPage isLogin={isLogin}/>}></Route>
                     <Route path="*" element={<NotFoundPage/>}></Route>
                 </Routes>
             </Router>

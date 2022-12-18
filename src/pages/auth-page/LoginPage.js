@@ -31,7 +31,7 @@ function LoginPage(props) {
           localStorage.setItem("db-user_id", logindata.id);
           alert("로그인에 성공하셨습니다.");
           props.setIsLogin(true);
-          navigate("/main");
+          navigate("/");
         } else {
         }
       });
