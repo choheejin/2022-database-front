@@ -47,7 +47,7 @@ function Navigation(props) {
                 <div>
                     {
                         User !== ''?
-                            <div className="flex gap-1 sm:gap-4 sm:text-md text-xs"> <a className="duration-[0.2s] hover:text-pink-500" href={process.env.REACT_APP_PUBLIC_URL+"/my-page"}>{User}</a> <a href={process.env.REACT_APP_PUBLIC_URL+'/posts/'+User} className="duration-[0.2s] hover:text-blue-500">내 글목록</a> <a href={process.env.REACT_APP_PUBLIC_URL+"/posts/write"} className="duration-[0.2s] hover:text-blue-500">글 작성하기</a><a className="cursor-pointer" onClick={() => { localStorage.clear(); setUser(''); props.setIsLogin(false); navigate('/');}}>로그아웃</a></div>
+                            <div className="flex gap-1 sm:gap-4  sm:text-base text-xs"> <a className="duration-[0.2s] hover:text-pink-500" href={process.env.REACT_APP_PUBLIC_URL+"/my-page"}>{User}</a> <a href={process.env.REACT_APP_PUBLIC_URL+'/posts/'+User} className="duration-[0.2s] hover:text-blue-500">내 글목록</a> <a href={process.env.REACT_APP_PUBLIC_URL+"/posts/write"} className="duration-[0.2s] hover:text-blue-500">글 작성하기</a><a className="cursor-pointer" onClick={() => { localStorage.clear(); setUser(''); props.setIsLogin(false); navigate('/');}}>로그아웃</a></div>
                             : <a href={process.env.REACT_APP_PUBLIC_URL+'/login'}>로그인 하기</a>
                     }
                 </div>
