@@ -76,7 +76,7 @@ export default function PostDetailPage() {
     }, [posting]);
 
     const deleteArticle = () => {
-        axios.delete(process.env.REACT_APP_API_URL + '/article/delete/' + postData.article_id).then((response) => {
+        axios.post(process.env.REACT_APP_API_URL + '/article/delete/' + postData.article_id).then((response) => {
             if (response.status === 200) {
                 alert('게시물 삭제가 완료되었습니다');
                 navigate('/');

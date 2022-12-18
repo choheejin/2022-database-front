@@ -15,7 +15,7 @@ export default function CommentItem(props) {
     };
 
     const deleteComments = () => {
-        axios.delete(process.env.REACT_APP_API_URL + '/comment/delete/' + props.items.comment_id).then((response) =>{
+        axios.post(process.env.REACT_APP_API_URL + '/comment/delete/' + props.items.comment_id).then((response) =>{
                 if(response.status === 200){
                     alert('댓글 삭제가 완료되었습니다');
                     props.setPosting(!props.posting);
