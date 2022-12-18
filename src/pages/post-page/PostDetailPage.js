@@ -11,24 +11,25 @@ export default function PostDetailPage() {
     const [loading, setLoading] = useState(false);
     const [history, setHistory] = useState(false);
     const [posting, setPosting] = useState(false);
-    const [userInfo, setUserInfo] = useState({});
     const params = useParams();
     const navigate = useNavigate();
 
     const getArticle = async () => {
         if (params.key1 === localStorage.getItem('db-user_id')) {
             return await axios.get(process.env.REACT_APP_API_URL + '/article/user/' + params.key).then(response => {
+                setLoading(false);
+
                 if (response.data.status === 200) {
                     setPostData(response.data.response);
                 }
-                setLoading(false);
             });
         } else {
             return await axios.get(process.env.REACT_APP_API_URL + '/article/non-user/' + params.key).then(response => {
+                setLoading(false);
+
                 if (response.data.status === 200) {
                     setPostData(response.data.response);
                 }
-                setLoading(false);
             });
         }
     };
@@ -63,7 +64,6 @@ export default function PostDetailPage() {
     useEffect(() => {
         if (localStorage.getItem('db-user_id')) {
             postHistory();
-            updateHistory();
         }
     }, [history]);
 
@@ -96,7 +96,7 @@ export default function PostDetailPage() {
                         <a href={process.env.REACT_APP_PUBLIC_URL+'/posts/'+postData.a_user} className="font-bold">{postData.a_user}</a>
                         <div className="text-sm min-w-fit">{postData.a_date}</div>
                         {
-                            userInfo.id === postData.a_user ?
+                            localStorage.getItem('db-user_id') === postData.a_user ?
                                 <div className="flex w-full justify-end gap-2">
                                     <Link to={`/posts/write`}
                                         state={{ postData }} >
