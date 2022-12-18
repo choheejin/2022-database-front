@@ -93,7 +93,7 @@ export default function PostDetailPage() {
                 <div className="w-full flex flex-col gap-4 mt-16 mb-20">
                     <div className="font-bold text-4xl">{postData.title}</div>
                     <div className="flex gap-4">
-                        <a href="#" className="font-bold">{postData.a_user}</a>
+                        <a href={process.env.REACT_APP_PUBLIC_URL+'/posts/'+postData.a_user} className="font-bold">{postData.a_user}</a>
                         <div className="text-sm min-w-fit">{postData.a_date}</div>
                         {
                             userInfo.id === postData.a_user ?

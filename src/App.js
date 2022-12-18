@@ -13,7 +13,7 @@ function App() {
 
     return (
         <div className="bg-gray-50 min-h-screen">
-            <Router basename={process.env.PUBLIC_URL}>
+            <Router basename={process.env.REACT_APP_PUBLIC_URL}>
                 {isVisible ? <Navigation isLogin={isLogin} setIsLogin={setIsLogin}/> : <></>}
                 <Routes>
                     <Route path="/login" element={<LoginPage setIsLogin={setIsLogin} />}></Route>

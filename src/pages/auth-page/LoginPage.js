@@ -76,7 +76,7 @@ function LoginPage(props) {
           </button>
           <div className="text-end text-sm">
             아직 회원이 아니신가요?{" "}
-            <a href="/signup" className="text-blue-600 font-bold text-lg">
+            <a href={process.env.REACT_APP_PUBLIC_URL+"/signup"} className="text-blue-600 font-bold text-lg">
               회원가입
             </a>
           </div>

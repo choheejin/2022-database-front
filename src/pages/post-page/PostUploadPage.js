@@ -178,7 +178,7 @@ export default function PostUploadPage(props) {
                     className="bg-transparent focus:outline-none resize-none h-full pl-8 pt-1 mb-2.5" />
                 <sup className="p-4 text-sm">(<span id="nowByte">0</span>/280 bytes)</sup>
                 <div className="flex justify-between items-center bg-stone-700 py-2.5 px-3">
-                    <a href="/" className="flex gap-1 text-white font-bold hover:bg-stone-500 rounded-md px-3.5 py-1.5">
+                    <a href={process.env.REACT_APP_PUBLIC_URL+"/"} className="flex gap-1 text-white font-bold hover:bg-stone-500 rounded-md px-3.5 py-1.5">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                             stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round"
