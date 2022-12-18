@@ -83,7 +83,7 @@ export default function MyPage() {
         </div>
         <div>
           <div className="font-bold mb-4">획득한 배찌</div>
-          <div className="grid grid-cols-9 gap-2">
+          <div className="grid gap-2">
             <MyBadge />
           </div>
         </div>
