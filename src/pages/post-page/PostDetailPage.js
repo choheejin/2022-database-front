@@ -9,6 +9,7 @@ export default function PostDetailPage() {
     const [comment, setComment] = useState('');
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [history, setHistory] = useState(false);
     const [posting, setPosting] = useState(false);
     const [userInfo, setUserInfo] = useState({});
     const params = useParams();
@@ -46,34 +47,25 @@ export default function PostDetailPage() {
         })
     };
 
-    const getUserInfo = async () => {
-        return await axios.get(process.env.REACT_APP_API_URL + '/my-page/' + localStorage.getItem('db-user_id'));
-    };
-
     const postHistory = () => {
         axios.post(process.env.REACT_APP_API_URL + '/articles/history/post', { user_id: localStorage.getItem('db-user_id'), article_id: params.key }).then(response => {
-            setLoading(true);
-        })
+            if(response.data.status === 501){
+                updateHistory();
+            }
+        });
     }
 
     const updateHistory = () => {
         axios.put(process.env.REACT_APP_API_URL + '/articles/history/update/' + params.key, { user_id: localStorage.getItem('db-user_id') }).then(response => {
-            if (response.status === 200) {
-                setLoading(true);
-            }
         });
     };
 
     useEffect(() => {
         if (localStorage.getItem('db-user_id')) {
-            getUserInfo().then(response => {
-                setUserInfo(response.data.response);
-            });
+            postHistory();
+            updateHistory();
         }
-
-        postHistory();
-        updateHistory();
-    }, [loading]);
+    }, [history]);
 
     useEffect(() => {
         getArticle();
@@ -130,7 +122,7 @@ export default function PostDetailPage() {
                 {/*이전포스트*/}
                 <div className="w-full flex gap-2">
                     {postData.preArticle ?
-                        <div onClick={() => { navigate('/post/detail/' + postData.a_user + '/' + postData.preArticle.article_id); setLoading(!loading); setPosting(!posting); }}
+                        <div onClick={() => { navigate('/post/detail/' + postData.a_user + '/' + postData.preArticle.article_id); setLoading(!loading); setPosting(!posting); setHistory(!history);}}
                             className="flex w-1/2 bg-gray-200 cursor-pointer">
                             <div className="flex px-3 py-3.5 items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -147,7 +139,7 @@ export default function PostDetailPage() {
                         </div> : <div className="w-1/2"></div>}
 
                     {postData.nxtArticle ?
-                        <div onClick={() => { navigate('/post/detail/' + postData.a_user + '/' + postData.nxtArticle.article_id); setLoading(!loading); setPosting(!posting); setTimeout(() => { console.log('멈춤?') }, 1000); }}
+                        <div onClick={() => { navigate('/post/detail/' + postData.a_user + '/' + postData.nxtArticle.article_id); setLoading(!loading); setPosting(!posting); setHistory(!history);}}
                             className="flex w-1/2 bg-gray-200 justify-end cursor-pointer">
                             <div className="flex p-2 items-center gap-2">
                                 <div className="text-end">

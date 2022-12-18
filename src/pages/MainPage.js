@@ -156,17 +156,20 @@ function MainPage(props) {
                 </div>
                 <div className="clear-right"></div>
 
-                <div>
-                    <PaginationBox>
-                        <Pagination
-                            activePage={page}
-                            itemsCountPerPage={items}
-                            totalItemsCount={articles.length}
-                            pageRangeDisplayed={5}
-                            onChange={handlePageChange}>
-                        </Pagination>
-                    </PaginationBox>
-                </div>
+                {
+                    tab !== 4 ?
+                    <div>
+                        <PaginationBox>
+                            <Pagination
+                                activePage={page}
+                                itemsCountPerPage={items}
+                                totalItemsCount={articles.length}
+                                pageRangeDisplayed={5}
+                                onChange={handlePageChange}>
+                            </Pagination>
+                        </PaginationBox>
+                    </div> : <></>
+                }
             </div>
         </div >
     );
