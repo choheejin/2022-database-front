@@ -25,7 +25,7 @@ export default function CommentItem(props) {
     };
 
     return(
-        <div className="pt-3 pb-8 px-6 w-full h-full flex flex-col bg-gray-100">
+        <div className="pt-3 pb-8 px-6 sm:w-full h-full flex flex-col bg-gray-100">
             <div className="flex gap-2 mb-4">
                 <div className="flex gap-4 w-full items-center justify-center">
                     <div className="font-bold">{props.items.user_id}</div>

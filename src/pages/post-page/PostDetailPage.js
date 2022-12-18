@@ -87,7 +87,7 @@ export default function PostDetailPage() {
 
     return (
         <div className="w-full flex justify-center items-center fadein pb-44">
-            <div className="sm:w-[60%] flex flex-col gap-8">
+            <div className="sm:w-[60%] px-5 sm:px-0 flex flex-col gap-8">
 
                 {/*글내용*/}
                 <div className="w-full flex flex-col gap-4 mt-16 mb-20">
