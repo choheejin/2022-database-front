@@ -26,17 +26,21 @@ export default function MyBadge(props) {
       <div className="bg-gray-200 rounded-lg border-solid border-[1px] border-gray-400">
         {loading ? (
           <div className="flex p-3 gap-5">
-            {attendanceList.map((list, idx) => (
-              <div key={idx} className="">
-                <img
-                  className="w-16 object-center object-cover"
-                  src={process.env.PUBLIC_URL + "/images/badge1.png"}
-                />
-                <label className="text-sm font-bold drop-shadow-lg">
-                  {list.attendance_date.slice(0, 10)}
-                </label>
-              </div>
-            ))}
+            {attendanceList ? (
+              attendanceList.map((list, idx) => (
+                <div key={idx} className="flex flex-col items-center">
+                  <img
+                    className="w-16 object-center object-cover"
+                    src={process.env.PUBLIC_URL + "/images/badge1.png"}
+                  />
+                  <label className="text-sm font-bold drop-shadow-lg">
+                    {list.badge_detail}
+                  </label>
+                </div>
+              ))
+            ) : (
+              <></>
+            )}
           </div>
         ) : null}
       </div>
