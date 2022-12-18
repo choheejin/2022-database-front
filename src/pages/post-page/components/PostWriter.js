@@ -6,9 +6,9 @@ export default function PostWriter(props) {
     return (
         <div className="flex flex-col gap-4 px-5 py-2 ">
             <div className="flex border-b border-gray-200 gap-4 pb-4">
-                <img className="w-28 drop-shadow-xl shadow-indigo-100 h-28 object-center object-cover rounded-full" src={process.env.PUBLIC_URL +'/' + props.url} />
+                <img className="w-14 h-14 sm:w-28 drop-shadow-xl shadow-indigo-100 sm:h-28 object-center object-cover rounded-full" src={process.env.PUBLIC_URL +'/' + props.url} />
                 <div onClick={() => navigate('/posts/'+props.name)}
-                     className="flex cursor-pointer font-bold items-center text-xl">{props.name}</div>
+                     className="flex cursor-pointer font-bold items-center sm:text-xl">{props.name}</div>
             </div>
             <div className="flex gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(107 114 128)"

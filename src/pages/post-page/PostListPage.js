@@ -31,10 +31,10 @@ export default function PostListPage() {
 
     return(
         <div className="w-full flex flex-col justify-center items-center">
-            <div className="mt-10 w-[60%]">
+            <div className="mt-10 w-[90%] sm:w-[60%]">
                 <PostWriter name={params.key} url={'profile_cat.png'} />
             </div>
-            <div className="w-[55%]  flex flex-col gap-8 mb-20">
+            <div className="sm:w-[55%]  flex flex-col gap-8 mb-20">
                 <div className="mt-16">
                     {
                         postList.length > 0 ? postList.map(item => <MyPostItem key={item.article_id} user={params.key} item={item} />) : <></>

@@ -105,18 +105,18 @@ function MainPage(props) {
     return (
         <div className="w-full flex justify-center">
             <div className="w-[75%] mt-3 mb-32">
-                <div className="flex gap-2 mb-3 text-lg font-semibold mb-7">
-                    <div onClick={() => {setTab(1); setPage(1);}} className={`px-5 cursor-pointer select-none pb-1 ${tab === 1 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>일상</div>
-                    <div onClick={() => {setTab(2); setPage(1);}} className={`px-5 cursor-pointer select-none pb-1 ${tab === 2 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>고민</div>
-                    <div onClick={() => {setTab(3); setPage(1);}} className={`px-5 cursor-pointer select-none pb-1 ${tab === 3 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>질문</div>
+                <div className="flex w-full sm:w-auto gap-3 sm:gap-2 mb-3 text-lg font-semibold mb-7">
+                    <div onClick={() => {setTab(1); setPage(1);}} className={`sm:px-5 cursor-pointer select-none pb-1 ${tab === 1 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>일상</div>
+                    <div onClick={() => {setTab(2); setPage(1);}} className={`sm:px-5 cursor-pointer select-none pb-1 ${tab === 2 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>고민</div>
+                    <div onClick={() => {setTab(3); setPage(1);}} className={`sm:px-5 cursor-pointer select-none pb-1 ${tab === 3 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>질문</div>
                     {
-                        User !== '' ? <div onClick={() => setTab(4)} className={`px-5 cursor-pointer select-none pb-1  ${tab === 4 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>최근 본 게시글</div> : <div></div>
+                        User !== '' ? <div onClick={() => setTab(4)} className={`sm:px-5 cursor-pointer select-none pb-1  ${tab === 4 ? 'text-blue-500 border-b-2 border-blue-500' : ''}`}>히스토리</div> : <div></div>
                     }
                 </div>
 
                 {/* 검색창 */}
                 <div>
-                    <div className={`float-right w-[25%] focus:outline-none border-[1.5px] border-gray-400 rounded-full px-1 py-0.5 mb-8`}
+                    <div className={`float-right w-full sm:w-[25%] focus:outline-none border-[1.5px] border-gray-400 rounded-full px-1 py-0.5 mb-8`}
                         onSubmit={(e) => { getSearch(); }}>
                         <table>
                             <tr>
@@ -140,7 +140,7 @@ function MainPage(props) {
                     <div className="clear-right"></div>
                 </div >
 
-                <div className=" grid grid-cols-3 gap-5 items-center justify-center">
+                <div className=" grid grid-cols-1 sm:grid-cols-3 gap-5 items-center justify-center">
                     {
                         articles.slice(
                             items * (page - 1),
