@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 
-function LoginPage() {
+function LoginPage(props) {
   const [userID, setUserID] = new useState("");
   const [password, setPassword] = new useState("");
   const [isSubmit, setIsSubmit] = new useState(false);
@@ -21,7 +21,6 @@ function LoginPage() {
     console.log(userID, password);
 
     console.log(
-      "LoginForm:window.sessionStorage(id) =>",
       window.sessionStorage.getItem("id")
     );
     axios
@@ -29,11 +28,9 @@ function LoginPage() {
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
-          alert("로그인에 성공하셨습니다.");
           localStorage.setItem("db-user_id", logindata.id);
           alert("로그인에 성공하셨습니다.");
-          // 이곳에 출석체크 데이터를 보내주는 코드 추가
-
+          props.setIsLogin(true);
           navigate("/main");
         } else {
         }

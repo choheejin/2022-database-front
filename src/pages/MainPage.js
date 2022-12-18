@@ -142,9 +142,6 @@ function MainPage(props) {
 
                 <div className=" grid grid-cols-3 gap-5 items-center justify-center">
                     {
-                        // articles.map((item) => <PostItem item={item} key={item.article_id} />)
-                    }
-                    {
                         articles.slice(
                             items * (page - 1),
                             items * (page - 1) + items

@@ -16,7 +16,7 @@ function App() {
             {isVisible ? <Navigation isLogin={isLogin} setIsLogin={setIsLogin}/> : <></>}
             <Router>
                 <Routes>
-                    <Route path="/login" element={<LoginPage isLogin={setIsLogin} />}></Route>
+                    <Route path="/login" element={<LoginPage setIsLogin={setIsLogin} />}></Route>
                     <Route path="/signup" element={<SignupPage/>}></Route>
                     <Route path="/my-page" element={<MyPage/>}></Route>
 

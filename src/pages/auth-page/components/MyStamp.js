@@ -23,7 +23,6 @@ export default function MyStamp(props) {
 
   return (
     <>
-      {/* <Calendar onChange={onChange} value={value} />/ */}
       <div className="bg-gray-200 rounded-lg border-solid border-[1px] border-gray-400">
         {loading ? (
           <div className="flex p-3 gap-5">

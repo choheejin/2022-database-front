@@ -73,7 +73,7 @@ export default function PostDetailPage() {
 
         postHistory();
         updateHistory();
-    }, []);
+    }, [loading]);
 
     useEffect(() => {
         getArticle();

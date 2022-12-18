@@ -29,13 +29,12 @@ export default function MyPage() {
         <div className="w-[70%] flex items-center gap-4">
           <img
             className="w-24 h-24 object-cover object-center rounded-full"
-            src={process.env.REACT_APP_PUBLIC_URL + "/images/sample.jpeg"}
+            src={process.env.REACT_APP_PUBLIC_URL + "/profile_cat.png"}
           />
           <div>
             <label className="font-bold text-lg">{userInfo.id}</label>
             <div className="flex gap-2 text-sm">
               <label className="text-slate-400">훌륭합니다! 성실하시군요</label>
-              {/* <label className="font-semibold">VIP회원</label> */}
             </div>
           </div>
         </div>
